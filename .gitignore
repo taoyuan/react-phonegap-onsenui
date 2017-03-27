@@ -61,7 +61,7 @@ typings/
 
 www/**
 
-plugins/
-platforms/
+plugins
+platforms
 report.html
 .DS_Store
