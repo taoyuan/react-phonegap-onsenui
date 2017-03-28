@@ -1,5 +1,5 @@
 {
-  "name": "rop",
+  "name": "react-phonegap-onsenui",
   "version": "1.0.0",
   "description": "A React Phonegap Onsen UI boilerplate",
   "main": "src/index.js",
@@ -52,6 +52,6 @@
     "test": "echo \"No tests (yet!) -- submit a PR?\" && exit 0"
   },
   "keywords": [],
-  "author": "none specified",
-  "license": "none specified"
+  "author": "Yuan Tao <towyuan@outlook.com>",
+  "license": "MIT"
 }
