@@ -1,7 +1,4 @@
-const React = require('react');
-
-const Ons = require('react-onsenui');
-
+import React from 'react';
 
 import {
   Page,
@@ -11,27 +8,27 @@ import {
   ListItem
 } from 'react-onsenui';
 
-import PageExample from './examples/Page';
-import ListExample from './examples/List';
-import LazyListExample from './examples/LazyList';
-import TabbarExample from './examples/Tabbar';
-import AlertDialogExample from './examples/AlertDialog';
-import SplitterExample from './examples/Splitter';
-import InputExample from './examples/Input';
-import IconExample from './examples/Icon';
-import RippleExample from './examples/Ripple';
-import SpeedDialExample from './examples/SpeedDial';
-import PullHookExample from './examples/PullHook';
-import CarouselExample from './examples/Carousel';
-import PopoverExample from './examples/Popover';
-import DialogExample from './examples/Dialog';
-import ModalExample from './examples/Modal';
-import SwitchExample from './examples/Switch';
-import ProgressBarExample from './examples/ProgressBar';
-import RangeExample from './examples/Range';
-import RowColumnExample from './examples/RowColumn';
-import BackButtonExample from './examples/BackButton';
-import BottomToolbarExample from './examples/BottomToolbar';
+import PageExample from './Page';
+import ListExample from './List';
+import LazyListExample from './LazyList';
+import TabbarExample from './Tabbar';
+import AlertDialogExample from './AlertDialog';
+import SplitterExample from './Splitter';
+import InputExample from './Input';
+import IconExample from './Icon';
+import RippleExample from './Ripple';
+import SpeedDialExample from './SpeedDial';
+import PullHookExample from './PullHook';
+import CarouselExample from './Carousel';
+import PopoverExample from './Popover';
+import DialogExample from './Dialog';
+import ModalExample from './Modal';
+import SwitchExample from './Switch';
+import ProgressBarExample from './ProgressBar';
+import RangeExample from './Range';
+import RowColumnExample from './RowColumn';
+import BackButtonExample from './BackButton';
+import BottomToolbarExample from './BottomToolbar';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -161,7 +158,7 @@ class Examples extends React.Component {
   }
 }
 
-export default class App extends React.Component {
+export default class ExampleApp extends React.Component {
   renderPage(route, navigator) {
     const props = route.props || {};
     props.navigator = navigator;
