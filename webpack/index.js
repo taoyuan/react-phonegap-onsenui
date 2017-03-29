@@ -43,7 +43,7 @@ module.exports = function (opts) {
   function buildConfig(wantedEnv) {
     let isValid = wantedEnv && wantedEnv.length > 0 && allowedEnvs.indexOf(wantedEnv) !== -1;
     let validEnv = isValid ? wantedEnv : 'dev';
-    let config = require(path.join(__dirname, validEnv));
+    let config = require(path.join(__dirname, `webpack-${validEnv}`));
     return _.omit(config, ['debug', 'additionalPaths']);
   }
 

@@ -5,10 +5,9 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-let baseConfig = require('./base');
-let defaultSettings = require('./defaults');
+const baseConfig = require('./webpack-base');
 
-let config = Object.assign({}, baseConfig, {
+const config = Object.assign({}, baseConfig, {
   entry: {
     app: path.resolve(__dirname, '../src/main'),
     vendor: ['react', 'react-dom', 'onsenui', 'react-onsenui']
@@ -37,8 +36,7 @@ let config = Object.assign({}, baseConfig, {
       from: path.join(__dirname, '..', 'src', 'assets'),
       to: 'assets'
     }]),
-  ],
-  module: defaultSettings.getDefaultModules()
+  ]
 });
 
 // Add needed loaders to the defaults here

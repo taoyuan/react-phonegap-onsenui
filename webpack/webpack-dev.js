@@ -1,12 +1,11 @@
 'use strict';
 
-let path = require('path');
-let webpack = require('webpack');
-let baseConfig = require('./base');
-let defaultSettings = require('./defaults');
+const path = require('path');
+const webpack = require('webpack');
 
+const baseConfig = require('./webpack-base');
 
-let config = Object.assign({}, baseConfig, {
+const config = Object.assign({}, baseConfig, {
   entry: [
     'webpack/hot/only-dev-server',
     './client/app/index'
@@ -17,7 +16,6 @@ let config = Object.assign({}, baseConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
-  module: defaultSettings.getDefaultModules()
 });
 
 // Add needed loaders to the defaults here
