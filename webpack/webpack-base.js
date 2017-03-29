@@ -1,5 +1,6 @@
 'use strict';
 const path = require('path');
+const webpack = require('webpack');
 
 const srcPath = path.join(__dirname, '../src');
 
@@ -7,18 +8,15 @@ const srcPath = path.join(__dirname, '../src');
 // Add all foreign plugins you may need into this array
 // @example:
 // const npmBase = path.join(__dirname, '../node_modules');
-const additionalPaths = [];
+// const additionalPaths = [];
 
-module.exports = {
-  additionalPaths,
-  debug: true,
-  devtool: 'eval',
-  output: {
-    path: path.join(__dirname, '../www'),
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].chunk.js',
-    // publicPath: '',
-  },
+module.exports = options => ({
+  entry: options.entry,
+  output: Object.assign({ // Compile into js/build.js
+    path: path.resolve(process.cwd(), 'www'),
+    publicPath: '',
+  }, options.output), // Merge with env dependent settings
+
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css', '.html', '.styl'],
 
@@ -32,10 +30,22 @@ module.exports = {
       utils: `${srcPath}/utils/`,
       config: `${srcPath}/config/` + process.env.REACT_WEBPACK_ENV,
       'react/lib/ReactMount': 'react-dom/lib/ReactMount'
-    }
+    },
+    mainFields: [
+      'browser',
+      'jsnext:main',
+      'main',
+    ],
   },
   module: {
     loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        include: [path.join(__dirname, '../src')].concat(options.additionalPaths || []),
+        exclude: /node_modules/,
+        query: options.babelQuery,
+      },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
@@ -102,5 +112,25 @@ module.exports = {
       //   loader: 'file-loader'
       // }
     ]
-  }
-};
+  },
+
+  plugins: options.plugins.concat([
+    // new webpack.ProvidePlugin({
+    //   // make fetch available
+    //   fetch: 'exports-loader?self.fetch!whatwg-fetch',
+    // }),
+
+    // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
+    // inside your code for any environment checks; UglifyJS will automatically
+    // drop any unreachable code.
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(options.env),
+      },
+    }),
+    new webpack.NamedModulesPlugin(),
+  ]),
+  devtool: options.devtool,
+  target: 'web', // Make web variables accessible to webpack, e.g. window
+  performance: options.performance || {},
+});

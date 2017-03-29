@@ -2,51 +2,58 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const baseConfig = require('./webpack-base');
-
-const config = Object.assign({}, baseConfig, {
+module.exports = require('./webpack-base')({
+  env: 'production',
+  devtool: 'cheap-source-map',
   entry: {
-    app: path.resolve(__dirname, '../src/main'),
+    app: path.join(process.cwd(), 'src/main'),
     vendor: ['react', 'react-dom', 'onsenui', 'react-onsenui']
   },
-  cache: false,
-  devtool: 'cheap-source-map',
+  // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
+  output: {
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor']
+      name: "vendor",
+      minChunks: Infinity,
     }),
-    new ExtractTextPlugin('[name].css'),
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new CopyWebpackPlugin([{
-      from: path.join(__dirname, '..', 'src', 'index.html')
-    }, {
-      from: path.join(__dirname, '..', 'src', 'icon.png')
-    }, {
-      from: path.join(__dirname, '..', 'src', 'assets'),
-      to: 'assets'
-    }]),
-  ]
-});
+    // Minify and optimize the index.html
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      minify: {
+        removeComments: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+      inject: true,
+    }),
 
-// Add needed loaders to the defaults here
-config.module.loaders.push({
-  test: /\.(js|jsx)$/,
-  loader: 'babel-loader',
-  include: [].concat(
-    config.additionalPaths,
-    [path.join(__dirname, '../src')]
-  )
+    new CopyWebpackPlugin([
+      // {
+      //   from: path.join(__dirname, '..', 'src', 'index.html')
+      // },
+      {
+        from: path.join(__dirname, '..', 'src', 'icon.png')
+      },
+      {
+        from: path.join(__dirname, '..', 'src', 'assets'),
+        to: 'assets'
+      }
+    ]),
+  ],
+  performance: {
+    assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
+  },
 });
-
-module.exports = config;

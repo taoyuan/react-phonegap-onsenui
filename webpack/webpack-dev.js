@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const baseConfig = require('./webpack-base');
 
 const config = Object.assign({}, baseConfig, {
+  env: 'development',
   entry: [
     'webpack/hot/only-dev-server',
     './client/app/index'
