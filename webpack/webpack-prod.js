@@ -2,7 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -10,7 +10,7 @@ module.exports = require('./webpack-base')({
   env: 'production',
   devtool: 'cheap-source-map',
   entry: {
-    app: path.join(process.cwd(), 'src/main'),
+    app: path.join(process.cwd(), 'src/app'),
     vendor: ['react', 'react-dom', 'onsenui', 'react-onsenui']
   },
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
@@ -41,9 +41,6 @@ module.exports = require('./webpack-base')({
     }),
 
     new CopyWebpackPlugin([
-      // {
-      //   from: path.join(__dirname, '..', 'src', 'index.html')
-      // },
       {
         from: path.join(__dirname, '..', 'src', 'icon.png')
       },

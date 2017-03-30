@@ -17,10 +17,12 @@ module.exports = options => ({
     publicPath: '',
   }, options.output), // Merge with env dependent settings
 
+
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css', '.html', '.styl'],
+    // extensions: ['.js', '.jsx', '.json', '.css', '.html', '.styl'],
 
     alias: {
+      services: `${srcPath}/services/`,
       actions: `${srcPath}/actions/`,
       components: `${srcPath}/components/`,
       containers: `${srcPath}/containers/`,
@@ -28,9 +30,11 @@ module.exports = options => ({
       stores: `${srcPath}/stores/`,
       styles: `${srcPath}/styles/`,
       utils: `${srcPath}/utils/`,
-      config: `${srcPath}/config/` + process.env.REACT_WEBPACK_ENV,
+      config: `${srcPath}/config/` + (process.env.REACT_WEBPACK_ENV || 'prod'),
       'react/lib/ReactMount': 'react-dom/lib/ReactMount'
     },
+    modules: ['app', 'node_modules'],
+    extensions: ['.js', '.jsx', '.json', '.css', '.html', '.styl', '.react.js'],
     mainFields: [
       'browser',
       'jsnext:main',
