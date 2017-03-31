@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 
 // List of allowed environments
@@ -18,8 +16,8 @@ process.env.REACT_WEBPACK_ENV = env;
 function buildConfig(wantedEnv) {
   const isValid = wantedEnv && wantedEnv.length > 0 && allowedEnvs.indexOf(wantedEnv) !== -1;
   const validEnv = isValid ? wantedEnv : 'dev';
-  return require(path.join(__dirname, `webpack/webpack-${validEnv}`));
-  // return _.omit(config, ['debug', 'additionalPaths']);
+  const config = require(path.join(__dirname, `supports/webpack/webpack-${validEnv}`));
+  return config;
 }
 
 module.exports = buildConfig(env);

@@ -29,7 +29,7 @@ import config from 'config';
 class MyComponent extends React.Component {
   constructor(props, ctx) {
     super(props, ctx);
-    let currentAppEnv = config.appEnv;
+    let currentEnv = config.env;
   }
 }
 ```

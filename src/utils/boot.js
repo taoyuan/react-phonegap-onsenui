@@ -14,7 +14,7 @@
  * @api public
  */
 export default function (require) {
-  return function initializers(done) {
+  return done => {
     let files = require.keys && require.keys();
     if (!files || !files.length) {
       return done();
@@ -25,12 +25,14 @@ export default function (require) {
 
     let idx = 0;
 
+    // eslint-disable-next-line consistent-return
     function next(err) {
       if (err) {
         return done(err);
       }
 
-      let file = files[idx++];
+      // eslint-disable-next-line no-plusplus
+      const file = files[idx++];
       // all done
       if (!file) {
         return done();
@@ -44,9 +46,9 @@ export default function (require) {
           mod = mod.default;
         }
 
-        if (typeof mod == 'function') {
-          let arity = mod.length;
-          if (arity == 1) {
+        if (typeof mod === 'function') {
+          const arity = mod.length;
+          if (arity === 1) {
             // Async initializer.  Exported function will be invoked, with next
             // being called when the initializer finishes.
             mod.call(that, next);
@@ -54,18 +56,18 @@ export default function (require) {
             // Sync initializer.  Exported function will be invoked, with next
             // being called immediately.
             mod.call(that);
-            next();
+            return next();
           }
         } else {
           // Initializer does not export a function.  Requiring the initializer
           // is sufficient to invoke it, next immediately.
-          next();
+          return next();
         }
       } catch (ex) {
-        next(ex);
+        return next(ex);
       }
     }
 
-    next();
-  }
+    return next();
+  };
 }

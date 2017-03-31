@@ -1,11 +1,5 @@
-/**
- * i18n.js
- *
- * This will setup the i18n language files and locale data for your app.
- *
- */
-import {addLocaleData} from "react-intl";
-import transform from "lodash/transform";
+import {addLocaleData} from 'react-intl';
+import transform from 'lodash/transform';
 
 addLocaleData(require('react-intl/locale-data/en'));
 addLocaleData(require('react-intl/locale-data/zh'));
@@ -25,11 +19,12 @@ export const formatTranslationMessages = (locale, messages) => {
     const formattedMessage = !messages[key] && locale !== DEFAULT_LOCALE
       ? defaultFormattedMessages[key]
       : messages[key];
-    return Object.assign(formattedMessages, { [key]: formattedMessage });
+    return Object.assign(formattedMessages, {[key]: formattedMessage});
   }, {});
 };
 
 export const translationMessages = transform(locales, (result, messages, locale) => {
+  // eslint-disable-next-line no-param-reassign
   result[locale] = formatTranslationMessages(locale, messages);
   return result;
 }, {});

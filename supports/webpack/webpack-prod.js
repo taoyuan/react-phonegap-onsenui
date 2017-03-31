@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -20,7 +18,7 @@ module.exports = require('./webpack-base')({
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor",
+      name: 'vendor',
       minChunks: Infinity,
     }),
     // Minify and optimize the index.html

@@ -1,6 +1,6 @@
-import {cancel, put, take, takeLatest} from "redux-saga/effects";
-import {LOCATION_CHANGE} from "react-router-redux";
-import {AUTH_REQUEST, authFailure, authSuccess} from "./actions";
+import {cancel, put, take, takeLatest} from 'redux-saga/effects';
+import {LOCATION_CHANGE} from 'react-router-redux';
+import {AUTH_REQUEST, authFailure, authSuccess} from './actions';
 
 /**
  * Github repos request/response handler

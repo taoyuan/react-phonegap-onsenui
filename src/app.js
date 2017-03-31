@@ -1,31 +1,26 @@
-import "babel-polyfill";
-import "onsenui/css/onsenui.css";
-import "onsenui/css/onsen-css-components.css";
-import "onsenui";
-// Import all the third party stuff
-import bootify from "bootify";
-import React from "react";
-import ReactDOM from "react-dom";
-import {Provider} from "react-redux";
-import ContextProvider from "react-with-context";
-import {HashRouter as Router} from "react-router-dom";
-import boot from "./utils/boot";
-// import {useScroll} from "react-router-scroll";
-import "sanitize.css/sanitize.css";
-// Import Language Provider
-import LanguageProvider from "services/LanguageProvider";
-/* eslint-disable import/no-webpack-loader-syntax */
-// Import CSS reset and Global Styles
-import "./global-styles";
-// Import routes
-// import createRoutes from "./routes";
-import Main from "containers/Main";
+import 'babel-polyfill';
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+import 'onsenui';
+import 'sanitize.css/sanitize.css';
 
-/* eslint-enable import/no-webpack-loader-syntax */
+import bootify from 'bootify';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import ContextProvider from 'react-with-context';
+import {HashRouter as Router} from 'react-router-dom';
+
+// Import Language Provider
+import LanguageProvider from 'services/LanguageProvider';
+import Main from 'containers/Main';
+
+import './global-styles';
+import boot from './utils/boot';
 
 const app = bootify({});
 app.phase(boot(require.context('./boot', true, /^\.\/.*\.(js|jsx)$/)));
-app.boot((err) => {
+app.boot(err => {
   if (err) throw err;
 
   ReactDOM.render(
@@ -40,7 +35,4 @@ app.boot((err) => {
     </ContextProvider>,
     document.getElementById('app')
   );
-
 });
-
-

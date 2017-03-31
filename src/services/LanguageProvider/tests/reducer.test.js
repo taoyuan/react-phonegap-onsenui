@@ -1,20 +1,19 @@
-import { fromJS } from 'immutable';
+import {fromJS} from 'immutable';
+import {assert} from 'chai';
 
 import languageProviderReducer from '../reducer';
-import {
-  CHANGE_LOCALE,
-} from '../constants';
+import {CHANGE_LOCALE} from '../constants';
 
 describe('languageProviderReducer', () => {
   it('returns the initial state', () => {
-    expect(languageProviderReducer(undefined, {})).toEqual(fromJS({
+    assert.deepEqual(languageProviderReducer(undefined, {}), fromJS({
       locale: 'en',
     }));
   });
 
   it('changes the locale', () => {
-    expect(languageProviderReducer(undefined, { type: CHANGE_LOCALE, locale: 'de' }).toJS()).toEqual({
-      locale: 'de',
+    assert.deepEqual(languageProviderReducer(undefined, {type: CHANGE_LOCALE, locale: 'zh'}).toJS(), {
+      locale: 'zh',
     });
   });
 });

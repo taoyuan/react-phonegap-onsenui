@@ -1,6 +1,4 @@
-"use strict";
-
-import {getAsyncInjectors} from "../utils/asyncInjectors";
+import {getAsyncInjectors} from '../utils/asyncInjectors';
 
 export default function () {
   const {injectReducer, injectSagas} = getAsyncInjectors(this.store);

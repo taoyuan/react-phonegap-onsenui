@@ -5,14 +5,10 @@
  */
 
 import { fromJS } from 'immutable';
-
+import config from 'config';
 import {
   CHANGE_LOCALE,
 } from './constants';
-// import {
-//   defaultLanguage,
-// } from 'config';
-import config from 'config';
 
 const initialState = fromJS({
   locale: config.defaultLanguage,

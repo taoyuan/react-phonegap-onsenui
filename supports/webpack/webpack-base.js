@@ -1,8 +1,8 @@
-'use strict';
+
 const path = require('path');
 const webpack = require('webpack');
 
-const srcPath = path.join(__dirname, '../src');
+const srcPath = path.join(process.cwd(), 'src');
 
 // Additional npm or bower modules to include in builds
 // Add all foreign plugins you may need into this array

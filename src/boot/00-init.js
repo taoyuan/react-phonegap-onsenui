@@ -1,8 +1,6 @@
-"use strict";
-
 import log from 'loglevel';
 import config from 'config';
-import FontFaceObserver from "fontfaceobserver";
+import FontFaceObserver from 'fontfaceobserver';
 
 export default function () {
   log.setLevel(config.loglevel || 'info');

@@ -1,19 +1,27 @@
-'use strict';
-
-import React from "react";
-import {connect} from "react-redux";
-import {createStructuredSelector} from "reselect";
-import {Redirect} from "react-router-dom";
-import {Button, Icon, Input, Page, Row, Toolbar, ToolbarButton} from "react-onsenui";
+import React from 'react';
+import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
+import {Redirect} from 'react-router-dom';
+import {Button, Icon, Input, Page, Toolbar, ToolbarButton} from 'react-onsenui';
 // load Onsen UI library
-import ons from "onsenui";
+import ons from 'onsenui';
 
-import {authRequest} from "services/Auth/actions";
-import {makeSelectUser} from "services/Auth/selectors";
+import {authRequest} from 'services/Auth/actions';
+import {makeSelectUser} from 'services/Auth/selectors';
 
-import "./styles.css";
+import './styles.css';
 
 class Login extends React.Component {
+
+  static propTypes = {
+    location: React.PropTypes.object.isRequired,
+    onLogin: React.PropTypes.func.isRequired,
+    user: React.PropTypes.object
+  };
+
+  static defaultProps = {
+    user: null
+  };
 
   constructor() {
     super();
@@ -34,10 +42,10 @@ class Login extends React.Component {
 
   forgotPassword() {
     ons.notification.prompt({
-      message: 'What is your mobile?',
-      callback: function (email) {
+      message: 'What is your phone number?',
+      callback: mobile => {
         ons.notification.alert({
-          message: 'The new password will be send to ' + email
+          message: 'The new password will be send to ' + mobile
         });
       }
     });
@@ -69,7 +77,7 @@ class Login extends React.Component {
           {button}
         </div>
       </Toolbar>
-    )
+    );
   }
 
   render() {
@@ -78,8 +86,8 @@ class Login extends React.Component {
 
     if (user) {
       return (
-        <Redirect to={from}/>
-      )
+        <Redirect to={from} />
+      );
     }
 
     let toolbarButton;
@@ -87,32 +95,35 @@ class Login extends React.Component {
     if (!ons.platform.isAndroid()) {
       toolbarButton = (
         <ToolbarButton onClick={this.signin}>
-          <Icon icon={{default: 'ion-log-in'}}/>
+          <Icon icon={{default: 'ion-log-in'}} />
         </ToolbarButton>
-      )
+      );
     }
 
     const {creds} = this.state;
     return (
       <div className="tile">
         <Page id="login" renderToolbar={() => this.renderToolbar(toolbarButton)}>
-          <div id='logo_title'>
+          <div id="logo_title">
             React PhoneGap OnsenUI
           </div>
-          <Input value={creds.id} onChange={e => this.idChanged(e)} placeholder="Mobile/Username/Email"
-                 type="text"
-                 modifier="underbar" float/>
-          <Input value={creds.password} onChange={e => this.passwordChanged(e)} placeholder="Password"
-                 type="password"
-                 modifier="underbar" float/>
-          <Button id='signin' onClick={e => this.signin(e)} modifier="large">Sign In</Button>
-          <Button id='forgot_btn' onClick={e => this.forgotPassword(e)} modifier="quiet">FORGOT PASSWORD?</Button>
+          <Input
+            value={creds.id} onChange={e => this.idChanged(e)} placeholder="Mobile/Username/Email"
+            type="text"
+            modifier="underbar" float
+          />
+          <Input
+            value={creds.password} onChange={e => this.passwordChanged(e)} placeholder="Password"
+            type="password"
+            modifier="underbar" float
+          />
+          <Button id="signin" onClick={e => this.signin(e)} modifier="large">Sign In</Button>
+          <Button id="forgot_btn" onClick={e => this.forgotPassword(e)} modifier="quiet">FORGOT PASSWORD?</Button>
         </Page>
       </div>
     );
   }
 }
-
 
 export function mapDispatchToProps(dispatch) {
   return {

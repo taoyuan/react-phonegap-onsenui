@@ -1,7 +1,5 @@
-"use strict";
-
-import createHistory from "history/createHashHistory";
-import configureStore from "../store";
+import createHistory from 'history/createHashHistory';
+import configureStore from '../store';
 
 export default function () {
   // Create redux store with history
