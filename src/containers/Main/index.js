@@ -1,25 +1,39 @@
 'use strict';
 
-/**
- *
- * App
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- */
+import React from "react";
+import {connect} from "react-redux";
+import {createStructuredSelector} from "reselect";
+import {Route, Switch, withRouter} from 'react-router-dom';
+import ProtectedRoute from 'components/ProtectedRoute';
+import {makeSelectUser} from 'services/Auth/selectors';
+import Login from "../Login";
+import ExampleApp from "../ExampleApp";
 
-import React from 'react';
-import ExampleApp from '../ExampleApp';
+export class Main extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-export function Main() {
-  return (
-    <ExampleApp>
-    </ExampleApp>
-  );
+
+  static propTypes = {
+    user: React.PropTypes.object
+  };
+
+  render() {
+    const {user} = this.props;
+    return (
+      <Switch>
+        <Route path='/login' component={Login}/>
+        <ProtectedRoute authenticate={user} component={ExampleApp}/>
+      </Switch>
+    );
+  }
 }
 
-Main.propTypes = {
-  children: React.PropTypes.node,
-};
+export function mapDispatchToProps(dispatch) {
+  return {};
+}
 
-export default Main;
+const mapStateToProps = createStructuredSelector({
+  user: makeSelectUser(),
+});
+
+// Wrap the component to inject dispatch and state into it
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

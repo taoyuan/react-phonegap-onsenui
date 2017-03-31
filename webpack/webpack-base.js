@@ -23,12 +23,8 @@ module.exports = options => ({
 
     alias: {
       services: `${srcPath}/services/`,
-      actions: `${srcPath}/actions/`,
       components: `${srcPath}/components/`,
       containers: `${srcPath}/containers/`,
-      sources: `${srcPath}/sources/`,
-      stores: `${srcPath}/stores/`,
-      styles: `${srcPath}/styles/`,
       utils: `${srcPath}/utils/`,
       config: `${srcPath}/config/` + (process.env.REACT_WEBPACK_ENV || 'prod'),
       'react/lib/ReactMount': 'react-dom/lib/ReactMount'

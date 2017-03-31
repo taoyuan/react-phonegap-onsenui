@@ -2,31 +2,55 @@
 
 const path = require('path');
 const webpack = require('webpack');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const baseConfig = require('./webpack-base');
-
-const config = Object.assign({}, baseConfig, {
+module.exports = require('./webpack-base')({
   env: 'development',
-  entry: [
-    'webpack/hot/only-dev-server',
-    './client/app/index'
-  ],
-  cache: true,
   devtool: 'source-map',
+  entry: {
+    app: path.join(process.cwd(), 'src/app'),
+    vendor: ['react', 'react-dom', 'onsenui', 'react-onsenui']
+  },
+  // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
+  output: {
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
+  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendor",
+      minChunks: Infinity,
+    }),
+    // Minify and optimize the index.html
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      minify: {
+        removeComments: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+      inject: true,
+    }),
+
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '..', 'src', 'icon.png')
+      },
+      {
+        from: path.join(__dirname, '..', 'src', 'assets'),
+        to: 'assets'
+      }
+    ]),
   ],
+  performance: {
+    assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
+  },
 });
-
-// Add needed loaders to the defaults here
-config.module.loaders.push({
-  test: /\.(js|jsx)$/,
-  loader: 'react-hot-loader!babel-loader',
-  include: [].concat(
-    config.additionalPaths,
-    [path.join(__dirname, '/../client')]
-  )
-});
-
-module.exports = config;

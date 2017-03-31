@@ -11,6 +11,9 @@
     "stage-0",
     "react"
   ],
+  "plugins": [
+    "transform-promise-to-bluebird"
+  ],
   "env": {
     "production": {
       "only": [

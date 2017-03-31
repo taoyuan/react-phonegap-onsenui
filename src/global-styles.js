@@ -27,4 +27,18 @@ injectGlobal`
     font-family: Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
   }
+  
+  .text-input--material__label {
+    color: #05c1e3;
+  }
+  
+  .text-input--material:focus {
+    background-image: -webkit-linear-gradient(#05c1e3, #05c1e3), -webkit-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+    background-image: -moz-linear-gradient(#05c1e3, #05c1e3), -moz-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+  }
+  
+  .navigation-bar--material {
+    background: #05c1e3;
+  }
 `;
+
