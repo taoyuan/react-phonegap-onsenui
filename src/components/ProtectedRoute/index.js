@@ -19,10 +19,11 @@ const ProtectedRoute = ({component, authenticate, failureRedirect, ...rest}) => 
 };
 
 ProtectedRoute.propTypes = {
-  component: React.PropTypes.object.isRequired,
+  component: React.PropTypes.func.isRequired,
   authenticate: React.PropTypes.oneOfType([
     React.PropTypes.func,
     React.PropTypes.bool,
+    React.PropTypes.object,
   ]),
   failureRedirect: React.PropTypes.string
 };

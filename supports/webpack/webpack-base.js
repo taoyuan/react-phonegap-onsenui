@@ -42,7 +42,7 @@ module.exports = options => ({
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        include: [path.join(__dirname, '../src')].concat(options.additionalPaths || []),
+        include: [path.join(process.cwd(), 'src')].concat(options.additionalPaths || []),
         exclude: /node_modules/,
         query: options.babelQuery,
       },

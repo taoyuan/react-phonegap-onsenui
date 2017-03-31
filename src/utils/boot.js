@@ -14,7 +14,7 @@
  * @api public
  */
 export default function (require) {
-  return done => {
+  return function (done) {
     let files = require.keys && require.keys();
     if (!files || !files.length) {
       return done();

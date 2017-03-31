@@ -42,10 +42,10 @@ module.exports = require('./webpack-base')({
 
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '..', 'src', 'icon.png')
+        from: path.join(process.cwd(), 'src', 'icon.png')
       },
       {
-        from: path.join(__dirname, '..', 'src', 'assets'),
+        from: path.join(process.cwd(), 'src', 'assets'),
         to: 'assets'
       }
     ]),
