@@ -1,0 +1,45 @@
+#logo {
+  margin-top: 28px;
+}
+
+#logo_title {
+  font-family: ProximaNova;
+  color: #05c1e3;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 15px;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+#login .page__content {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto 0;
+}
+
+#login ons-icon {
+  color: #05c1e3;
+}
+
+#login ons-input {
+  height: 42px;
+  width: 100%;
+}
+
+#login ons-input .text-input {
+  width: 100%;
+}
+
+#signin {
+  margin-top: 20px;
+  background: #05c1e3;
+}
+
+#forgot_btn {
+  color: #05c1e3;
+  margin-top: 28px;
+  font-size: 14px;
+  line-height: 12px;
+}

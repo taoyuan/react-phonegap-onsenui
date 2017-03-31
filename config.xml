@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.onsenui" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>phonegap-onsenui</name>
+<widget id="io.bbgo.react-phonegap-onsenui" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>react-phonegap-onsenui</name>
     <description>
-    Hello World sample application using React, Webpack and Hot Reloading.
+        A React Phonegap Onsen UI boilerplate
   </description>
-    <author email="support@phonegap.com" href="https://github.com/JedWatson">
-    Jed Watson and the PhoneGap Team
+    <author email="towyuan@outlook.com" href="https://github.com/taoyuan">
+    Yuan Tao and the BBGO Team
   </author>
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
@@ -101,6 +101,6 @@
         <allow-intent href="itms-apps:*" />
         <allow-navigation href="http://*/*" />
     </platform>
-    <plugin name="cordova-plugin-whitelist" version="1" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-statusbar" spec="~2.1.0" />
 </widget>
